@@ -44,6 +44,18 @@ engine.execute(
 - sqlalchemy.orm.session.Session.execute http://docs.sqlalchemy.org/en/latest/orm/session_api.html#sqlalchemy.orm.session.Session.execute
 - sqlalchemy.engine.Connection.execute http://docs.sqlalchemy.org/en/latest/core/connections.html#sqlalchemy.engine.Connection.execute
 
+## Debugging
+
+If you want to know what SQL statements SQLAlchemy does, just put this somewhere:
+
+````python
+import logging
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+````
+
+Or if you are using *Flask-SQLAlchemy*, just set `SQLALCHEMY_ECHO=True`.
+
 ## Subquery
 
 ````python
