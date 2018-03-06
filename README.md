@@ -1,4 +1,4 @@
-# SQLAlchemy Cheat SHeet
+# SQLAlchemy Cheat Sheet
 
 ## Getting started
 
