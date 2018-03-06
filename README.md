@@ -13,13 +13,16 @@ import os
 
 from sqlalchemy import create_engine
 
+# SQLALCHEMY_DATABASE_URI syntax:
+# postgresql://scott:tiger@localhost/mydatabase
+# mysql://scott:tiger@localhost/mydatabase
+# sqlite:////absolute/path/to/foo.db
 
-engine = create_engine(
-    os.environ['DATABASE_URL'],
-    connect_args={'sslmode':'require'}
-)
+engine = create_engine(os.environ['SQLALCHEMY_DATABASE_URI'])
 
 ````
+
+Also look at *Flask-SQLAlchemy* Quickstart http://flask-sqlalchemy.pocoo.org/2.1/quickstart/
 
 ## Raw SQL
 
