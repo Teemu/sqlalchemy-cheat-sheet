@@ -20,6 +20,10 @@ from sqlalchemy import create_engine
 
 engine = create_engine(os.environ['SQLALCHEMY_DATABASE_URI'])
 
+# If you want the ORM
+from sqlalchemy.orm import Session
+session = Session(engine)
+
 ````
 
 Also look at *Flask-SQLAlchemy* Quickstart http://flask-sqlalchemy.pocoo.org/2.1/quickstart/
@@ -46,6 +50,30 @@ engine.execute(
 
 - sqlalchemy.orm.session.Session.execute http://docs.sqlalchemy.org/en/latest/orm/session_api.html#sqlalchemy.orm.session.Session.execute
 - sqlalchemy.engine.Connection.execute http://docs.sqlalchemy.org/en/latest/core/connections.html#sqlalchemy.engine.Connection.execute
+
+## Feeling lazy but still want ORM?
+
+````python
+import os
+from sqlalchemy.engine import create_engine
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy import MetaData, Table, Column, ForeignKey
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine
+
+engine = create_engine(os.environ['SQLALCHEMY_DATABASE_URI'])
+session = Session(engine)
+metadata = MetaData()
+
+# In practice, the metadata.reflect might fail in some complicated cases
+# so only select the tables you need.
+metadata.reflect(engine, only=['user'])
+Base = automap_base(metadata=metadata)
+Base.prepare()
+
+# and now you can have your ORM class
+User = Base.classes.user
+````
 
 ## Debugging
 
